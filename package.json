@@ -4,7 +4,8 @@
   "description": "Notes app with redux and RTK query",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server",
+    "dev": "nodemon server"
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,11 @@
   "bugs": {
     "url": "https://github.com/chiedozie-ike/notes01/issues"
   },
-  "homepage": "https://github.com/chiedozie-ike/notes01#readme"
+  "homepage": "https://github.com/chiedozie-ike/notes01#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
 }
