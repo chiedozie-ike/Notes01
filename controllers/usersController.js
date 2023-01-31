@@ -103,6 +103,11 @@ const deleteUser = asyncHandler(async (req, res) => {
   if (!id) {
     return res.status(400).json({ message: "User ID required" });
   }
+
+  const notes = await Note.findOne({ user: id }).lean().exec();
+  if (notes?.length) {
+    return res.status(400).json({ message: "User has assigned notes" });
+  }
 });
 
 module.exports = {
