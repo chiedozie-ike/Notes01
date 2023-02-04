@@ -31,7 +31,31 @@ const getAllNotes = asyncHandler(async (req, res) => {
 // @desc Create new note
 // @route POST /notes
 // @access Private
-const createNewNote = asyncHandler(async (req, res) => {});
+const createNewNote = asyncHandler(async (req, res) => {
+  const { user, title, text } = rea.body;
+
+  // confirm data
+  if (!user || !title || !text) {
+    return res.status(400).json({ message: "All fields are required" });
+  }
+
+  // check for duplicate title
+  const duplicate = await Note.findOne({ title }).lean().exec();
+
+  if (duplicate) {
+    return res.status(409).json({ message: "Duplicate note title" });
+  }
+
+  // create and store the new user
+  const note = await Note.create({ user, title, text });
+
+  if (note) {
+    // created
+    return res.status(201).json({ message: "New note created" });
+  } else {
+    return res.status(400).json({ message: "Invalid note data received" });
+  }
+});
 
 // @desc Update a note
 // @route PATCH /notes
